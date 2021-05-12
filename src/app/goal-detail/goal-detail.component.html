@@ -1,5 +1,5 @@
 <p style="font-style: italic; color: grey;">
   {{goal.description}}
 </p>
-<p>This goal is due in {{goal.completeDate | dateCount}} days.</p>
-<button (click)= 'goalComplete(true)' style="background-color: rgb(55, 151, 55);">Complete</button>
+<p>This goal will be complete in {{goal.completeDate | dateCount}} days.</p>
+<button (click)= 'deleteGoal(true)' style="background-color: rgb(151, 55, 55);">Delete</button>
