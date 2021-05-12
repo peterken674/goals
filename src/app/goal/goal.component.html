@@ -1,31 +1,40 @@
 <div class="container">
-    <div class="card my-5 shadow bg-white rounded">
-  <div class="card-header bg-dark text-white">
+  <div class="card my-5 shadow bg-white rounded">
+    <div class="card-header bg-dark text-white">
       <h1 class="mx-4 mt-4">My Goals</h1>
-  </div>
+    </div>
 
-  <ul>
-    <div class="row px-5 py-4">
-      <div class="col-md-6">
-        <div *ngFor="let goal of goals; let i = index">
-          <li class="user-select-none" appStrikethrough>
-            {{ goal.name }} due on {{ goal.completeDate | date }}
-          </li>
+    <ul>
+      <div class="row px-5 py-4">
+        <div class="col-md-6">
+          <div *ngFor="let goal of goals; let i = index">
+            <li class="user-select-none" appStrikethrough>
+              {{ goal.name }} due on {{ goal.completeDate | date }}
+            </li>
 
-          <button class="btn btn-outline-success my-2" (click)="toggleDetails(i)">
-            Toggle Details
-          </button>
-          <app-goal-detail
-            *ngIf="goal.showDescription"
-            [goal]="goal"
-            (isComplete)="deleteGoal($event, i)"
-          ></app-goal-detail>
+            <button
+              class="btn btn-outline-success my-2"
+              (click)="toggleDetails(i)"
+            >
+              Toggle Details
+            </button>
+            <app-goal-detail
+              *ngIf="goal.showDescription"
+              [goal]="goal"
+              (isComplete)="deleteGoal($event, i)"
+            ></app-goal-detail>
+          </div>
+        </div>
+        <div class="col-md-6">
+            <app-goal-form></app-goal-form>
         </div>
       </div>
+    </ul>
+    <div
+      *ngIf="goals.length > 5"
+      class="text-warning bg-light px-5 card-footer"
+    >
+      <h5>You have too many goals.</h5>
     </div>
-  </ul>
-  <div *ngIf="goals.length > 5" class="text-warning bg-light px-5 card-footer">
-        <h5>You have too many goals.</h5>
-  </div>
   </div>
 </div>
