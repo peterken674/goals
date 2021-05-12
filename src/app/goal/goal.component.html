@@ -1,11 +1,26 @@
-<h1>My Goals</h1>
-<hr>
-<ul>
-  <div *ngFor='let goal of goals;let i = index'>
-    <li appStrikethrough>{{goal.name}} due on {{ goal.completeDate | date }}</li>
+<div class="container">
+  <h1>My Goals</h1>
+  <hr />
 
-    <button (click)='toggleDetails(i)'>Toggle Details</button>
-    <app-goal-detail *ngIf='goal.showDescription' [goal]='goal' (isComplete) = 'deleteGoal($event,i)'></app-goal-detail>
-  </div>
-</ul>
-<p *ngIf='goals.length > 5'>You have too many goals</p>
+  <ul>
+    <div class="row">
+      <div class="col-md-6">
+        <div *ngFor="let goal of goals; let i = index">
+          <li class="user-select-none" appStrikethrough>
+            {{ goal.name }} due on {{ goal.completeDate | date }}
+          </li>
+
+          <button class="btn btn-primary my-2" (click)="toggleDetails(i)">
+            Toggle Details
+          </button>
+          <app-goal-detail
+            *ngIf="goal.showDescription"
+            [goal]="goal"
+            (isComplete)="deleteGoal($event, i)"
+          ></app-goal-detail>
+        </div>
+      </div>
+    </div>
+  </ul>
+  <p *ngIf="goals.length > 5">You have too many goals</p>
+</div>
