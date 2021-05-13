@@ -20,7 +20,8 @@ export class GoalComponent implements OnInit {
   addNewGoal(goal){
       let goalLength = this.goals.length;
       goal.id = goalLength + 1;
-      goal.completeDate = new Date(goal.completeDate);
+      let cDate = new Date(goal.completeDate);
+      goal.completeDate = new Date(cDate.getFullYear(), cDate.getMonth(), cDate.getDate());
       this.goals.push(goal);
   }
   toggleDetails(index){
