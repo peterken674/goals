@@ -23,6 +23,7 @@ export class GoalComponent implements OnInit {
       let cDate = new Date(goal.completeDate);
       goal.completeDate = new Date(cDate.getFullYear(), cDate.getMonth(), cDate.getDate());
       this.goals.push(goal);
+      alert('Goal successfully added.');
   }
   toggleDetails(index){
     this.goals[index].showDescription = !this.goals[index].showDescription;
@@ -41,5 +42,4 @@ export class GoalComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
