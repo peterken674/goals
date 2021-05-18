@@ -33,5 +33,11 @@
     <div
       *ngIf="goals.length > 5"
       class=" px-5 alert alert-warning">WARNING: You have too many goals.</div>
+      <div class="row mx-2">
+          <blockquote class="blockquote text-center">
+              <p class="my-4">{{quote.quote}}</p>
+              <footer class="blockquote-footer"><cite>{{quote.author}}</cite></footer>
+          </blockquote>
+      </div>
   </div>
 </div>

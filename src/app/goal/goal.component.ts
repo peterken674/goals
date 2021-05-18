@@ -1,7 +1,9 @@
+import { Quote } from '../quote-class/quote';
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../alert-service/alert.service';
 import { Goal } from '../goal'
 import { GoalService } from '../goal-service/goal.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-goal',
   templateUrl: './goal.component.html',
@@ -11,10 +13,13 @@ export class GoalComponent implements OnInit {
 
     goals: Goal[];
     alertService: AlertService;
-    constructor(goalService: GoalService, alertService:AlertService) {
+    quote: Quote;
+
+    constructor(goalService: GoalService, alertService:AlertService, private http: HttpClient) {
         this.goals = goalService.getGoals();
         this.alertService = alertService;
      }
+
 
   addNewGoal(goal){
       let goalLength = this.goals.length;
@@ -39,5 +44,17 @@ export class GoalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+      interface ApiResponse{
+         author: string;
+         quote: string;
+     }
+
+     this.http.get<ApiResponse>("http://quotes.stormconsultancy.co.uk/random.json").subscribe(data=>{
+         this.quote = new Quote(data.author, data.quote)
+     }), err=>{
+         this.quote = new Quote("Winston Churchill", "Never never give up!");
+         console.log("Ann error occured.");
+     }
   }
+
 }
