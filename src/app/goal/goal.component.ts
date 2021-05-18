@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from '../alert-service/alert.service';
 import { Goal } from '../goal'
 import { GoalService } from '../goal-service/goal.service';
 @Component({
@@ -9,8 +10,10 @@ import { GoalService } from '../goal-service/goal.service';
 export class GoalComponent implements OnInit {
 
     goals: Goal[];
-    constructor(goalService: GoalService) {
+    alertService: AlertService;
+    constructor(goalService: GoalService, alertService:AlertService) {
         this.goals = goalService.getGoals();
+        this.alertService = alertService;
      }
 
   addNewGoal(goal){
@@ -19,7 +22,7 @@ export class GoalComponent implements OnInit {
       let cDate = new Date(goal.completeDate);
       goal.completeDate = new Date(cDate.getFullYear(), cDate.getMonth(), cDate.getDate());
       this.goals.push(goal);
-      alert('Goal successfully added.');
+      this.alertService.alertMe("Goal successfully added.")
   }
   toggleDetails(index){
     this.goals[index].showDescription = !this.goals[index].showDescription;
@@ -30,6 +33,7 @@ export class GoalComponent implements OnInit {
         let toDelete = confirm(`Are you sure you want to delete "${this.goals[index].name}"?`);
         if(toDelete){
             this.goals.splice(index, 1);
+            this.alertService.alertMe("The goal has been deleted.");
         }
     }
   }
